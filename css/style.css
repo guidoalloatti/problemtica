@@ -1,0 +1,11 @@
+body {
+    background-color:lightpink;
+}
+
+.container {
+    width: 650px;
+    height: 650px;
+    margin: auto;
+    overflow: hidden;
+    justify-content: center;
+}
