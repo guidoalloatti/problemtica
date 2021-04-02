@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/register.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
+
+    <title>TFTopaz App: Register</title>
+</head>
+<body>
+    <header>
+        <div>
+            <h1 id="headerTitle">Ready to become a TFT Challenger? Register now!</h1>
+        </div>
+    </header>
+
+    
+    <div class="container">
+        <div class= "datos">
+            <form action="">
+                <label for="fname" required="">Full name:</label>
+                <input type="text" required id="fullName" name="fullName" onfocusout="validateFullName()"><br><br>
+                <label for="email" required>E-mail:</label>
+                <input type="email" required id="email" name="email" onfocusout="validateEmail()"><br><br>
+                <label for="password" required>Password:</label>
+                <input type="password" required id="password" name="password" onfocusout="validatePassword()"><br><br>
+                <label for="passwordConfirmation" required>Confirm password:</label>
+                <input type="password" required id="passwordConfirmation" name="passwordConfirmation" onfocusout="validatePasswordConfirmation()"><br><br>
+
+                <div class= "registerButton">
+                    <input type="button" class="reset-button botonLink" value="Reset" onclick="formReset()">
+                    <input type="button" class="submit-button botonLink" value="Register" onclick="formSubmit()">
+                </div>
+                <input type="button" class="fill-button botonLink" value="Fill Form" onclick="fillForm()">
+            </form>
+        </div>
+
+        <div id="fullname_error" class="error-message"></div>
+        <div id="email_error" class="error-message"></div>
+        <div id="password_error" class="error-message"></div>
+        <div id="password_confirmation_error" class="password-confirmation-error-message"></div>
+        <div id="all_good" class="all-good-message"></div>
+
+             
+        <div class="goToPage">
+            <a class="goto-login-button botonLink" href="./login.html">Go to Login</a>
+        </div>
+
+
+    </div>
+</body>
+</html>
+
+

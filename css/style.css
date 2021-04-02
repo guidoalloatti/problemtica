@@ -2,6 +2,87 @@ body {
     background-color:rgb(0, 0, 0);
 }
 
+.all-good-message {
+    display: none;
+    color: #FFF;
+    text-align: center;
+    background: green;
+    width: 340px;
+    margin: 20px auto;
+    height: 25px;
+    padding: 10px;
+    border-radius: 10px; 
+}
+
+.dont-have-account {
+    color: white;
+    text-align: center;
+    margin-top: 45px;
+}
+
+.goto-login-button {
+    position: absolute !important;
+    top: 19px !important;
+    left: 18px !important;
+}
+
+.fill-button {
+    color: white !important;
+    background: #929292 !important;
+    border: 1px solid #929292 !important;
+    padding: 5px 21px !important;
+    border-radius: 5px !important;
+    font-size: 12px;
+    margin-right: 5px;
+    position: absolute;
+    top: 76px;
+    right: 1px;
+}
+
+.reset-button {
+    color: white !important;
+    background: #ff8025 !important;
+    border: 1px solid #ff8025 !important;
+    padding: 10px 20px !important;
+    border-radius: 5px 0px 0px 5px !important;
+    font-size: 20px !important;
+    margin-right: 5px;
+}
+
+.submit-button {
+    color: white !important;
+    background: #42bb42 !important;
+    border: 1px solid #42bb42 !important;
+    padding: 10px 20px !important;
+    border-radius: 0px 5px 5px 0px !important;
+    font-size: 20px !important;
+}
+
+.error-message {
+    display: none;
+    color: #FFF;
+    text-align: center;
+    background: #711b1b94;
+    width: 340px;
+    margin: 20px auto;
+    height: 25px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.password-confirmation-error-message {
+    display: none;
+    color: #FFF;
+    text-align: center;
+    background: #711b1b94;
+    width: 400px;
+    margin: 20px auto;
+    height: 40px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
 .container {
     padding-top: 50px;
     margin: auto;
@@ -37,8 +118,9 @@ header{
     font-size: 30px;
     font-family: 'Sedgwick Ave', cursive;
     text-align: center;
-    padding: 1px;
+    padding: 20px;
 }
+
 input[type=text] {
     width: 100%;
     padding: 12px 20px;
@@ -86,7 +168,7 @@ input[type=email] {
 }
 
   .goToPage{
-    margin-top: 100px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
   }
