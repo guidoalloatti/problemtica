@@ -11,17 +11,11 @@ var validations = {
 	passwordConfirmationValid: false
 };
 
-// This function is used to validate the email format using a regular expression
-// Function Name: validateEmailRegex
-// Parameters: email (string)
-// Return: boolean (if email format is valid)
 function validateEmailRegex(email) {
   const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 }
 
-// (?=.*[0-9]) - Assert a string has at least one number;
-// (?=.*[!@#$%^&*]) - Assert a string has at least one special character.
 function validatePasswordRegex(password) {
 	const re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
   return re.test(String(password).toLowerCase());
@@ -46,13 +40,13 @@ function validatePasswordConfirmation() {
 	if(passwordConfirmation != password) {
 		var message = "The password confirmation does not match the password.";
 		error.innerHTML = message;
-	  error.style.display = "block";
+	 	error.style.display = "block";
 		validations.passwordConfirmationValid = false;
 		checkAllFields();
 	}	else if (!validatePasswordRegex(password)) {
 		var message = 'The password confirmation is invalid.';
 		error.innerHTML = message;
-	  error.style.display = "block";
+	  	error.style.display = "block";
 		validations.passwordConfirmationValid = false;
 		checkAllFields();
 	} else {
@@ -65,7 +59,7 @@ function validatePasswordConfirmation() {
 function validatePassword() {
 	var password = document.getElementById("password").value;
 	var error = document.getElementById("password_error");
-	
+
 	if(!validatePasswordRegex(password)) {
 		var message = 'The password is invalid.';
 		error.innerHTML = message;
@@ -82,7 +76,7 @@ function validatePassword() {
 function validateFullName() {
 	var fullName = document.getElementById("fullName").value;
 	var error = document.getElementById("fullname_error");
-	
+
 	if(fullName.length > 128 || fullName.length < 3) {
 		var message = 'The name is invalid.';
 		error.innerHTML = message;
@@ -99,7 +93,7 @@ function validateFullName() {
 function validateEmail() {
 	var email = document.getElementById("email").value;
 	var error = document.getElementById("email_error");
-	
+
 	if(!validateEmailRegex(email)) {
 		var message = 'The email is invalid.';
 		error.innerHTML = message;
@@ -113,6 +107,22 @@ function validateEmail() {
 	}
 }
 
+function onFocusValidateFullName(){
+	var error = document.getElementById("fullname_error").style.display = "none";
+}
+
+function onFocusValidatePassword(){
+	var error = document.getElementById("password_error").style.display = "none";
+}
+
+function onFocusValidatePasswordConfirmation(){
+	var error = document.getElementById("password_confirmation_error").style.display = "none";
+}
+
+function onFocusValidateEmail(){
+	var error = document.getElementById("email_error").style.display = "none";
+}
+
 function cleanInputs() {
 	document.getElementById("fullName").value = "";
 	document.getElementById("email").value = "";
@@ -120,14 +130,32 @@ function cleanInputs() {
 	document.getElementById("passwordConfirmation").value = "";
 }
 
+function cleanErrorMessages() {
+	var elements = ["fullname_error", "email_error", "password_error", "password_confirmation_error"];
+
+	for(i = 0; i < elements.length; i++) {
+		document.getElementById(elements[i]).style.display = "none";
+	}
+}
+
 function cleanAllGood() {
 	var allGoodElement = document.getElementById("all_good").style.display = "none";
+}
+
+function cleanValidationDiv(){
+	var resetedValidationDiv = document.querySelector(".validationContent").style.display = "none";
+}
+
+function cleanDataDiv(){
+	var resetedDataDiv = document.querySelector("#formDataId").style.display = "none";
 }
 
 function formReset() {
 	cleanInputs();
 	cleanErrorMessages();
 	cleanAllGood();
+	cleanValidationDiv();
+	cleanDataDiv();
 }
 
 function runValidations() {
@@ -152,14 +180,6 @@ function allInputsValid() {
 		validations.passwordConfirmationValid == true)
 }
 
-function cleanErrorMessages() {
-	var elements = ["fullname_error", "email_error", "password_error", "password_confirmation_error"];
-
-	for(i = 0; i < elements.length; i++) {
-		document.getElementById(elements[i]).style.display = "none";
-	}
-}
-
 function setAllInputsValid() {
 	validations.passwordConfirmationValid = true;
 	validations.passwordValid = true;
@@ -175,4 +195,185 @@ function fillForm() {
 	setAllInputsValid();
 	checkAllFields();
 	cleanErrorMessages()
+}
+
+
+// QUEDÉ ACÁ HACIENDO EL DIV DE DATA DEL FORM
+
+var formData = document.querySelector(".formData");
+var formDataUL = document.querySelector(".formDataUL");
+
+function setDataDivDisplayNone(){
+	document.querySelector(".formData").style.display = "none"
+}
+setDataDivDisplayNone();
+
+function formDataDiv() {
+
+	var email = document.querySelector("#email").value;
+	var url = "https://jsonplaceholder.typicode.com/users?email=" + email;
+	console.log(fetch(url));
+
+	if(document.querySelector(".formData").style.display == "none"){
+		var formNodeName = document.createElement("LI");
+		var formInfoName = document.createTextNode("Full name:" + " " + document.querySelector("#fullName").value);
+		var formNodeEmail = document.createElement("LI");
+		var formInfoEmail = document.createTextNode("Email:" + " " + document.querySelector("#email").value);
+		var formNodePassword = document.createElement("LI");
+		var formInfoPassword = document.createTextNode("Password:" + " " + document.querySelector("#password").value);
+		var formNodePasswordConfirmation = document.createElement("LI");
+		var formInfoPasswordConfirmation = document.createTextNode("Password Confirmation:" + " " + document.querySelector("#passwordConfirmation").value);
+	
+		formNodeName.appendChild(formInfoName);
+		formNodeEmail.appendChild(formInfoEmail);
+		formNodePassword.appendChild(formInfoPassword)
+		formNodePasswordConfirmation.appendChild(formInfoPasswordConfirmation)
+		formDataUL.appendChild(formNodeName);
+		formDataUL.appendChild(formNodeEmail);
+		formDataUL.appendChild(formNodePassword);
+		formDataUL.appendChild(formNodePasswordConfirmation);
+	
+		document.querySelector(".formData").style.display = "block";
+		cleanAllGood();
+	}
+}	
+
+
+// VALIDATION FUNCTION BUTTON
+var validText = "Validation results:";
+var validationDiv = document.querySelector('.validationContent');
+var validationList = document.querySelector('.validationList');
+var formValidationHash = {
+	formInDom: false,
+	fieldsQuantity: false,
+	requiredFields: false,
+	associatedLabels: false,
+	validButtons: false
+}
+
+
+var formInDom = function() {
+    validationDiv.style.display = 'flex';
+    if (document.querySelector('#loginForm')) {
+        var formNode = document.createElement("LI");
+        var formText = document.createTextNode(validText + " " + 'Form is found' + " ");
+        formNode.appendChild(formText);
+        validationList.appendChild(formNode);
+				formValidationHash.formInDom = true;
+    }
+    else {
+        var noFormNode = document.createElement("LI");
+        var noFormText = document.createTextNode(validText + " " + 'Form is not found' + " ");
+        noFormNode.appendChild(noFormText);
+        validationList.appendChild(noFormNode);
+    }
+}
+
+var fieldsQuantity = function () {
+    validationDiv.style.display = 'flex';
+    var fields = document.querySelectorAll('input');
+    var fieldsNumber = fields.length;
+    if (fieldsNumber == 9) {
+        var fieldsNode = document.createElement("LI");
+        var fieldsText = document.createTextNode(validText + " " + 'Input fields are correct' + " ");
+        fieldsNode.appendChild(fieldsText);
+        validationList.appendChild(fieldsNode);
+				formValidationHash.fieldsQuantity = true;    
+		}
+    else {
+        var noFieldsNode = document.createElement("LI");
+        noFieldsNode.style.color = "red";
+        var noFieldsText = document.createTextNode(validText + " " + 'There are missing inputs' + " ");
+        noFieldsNode.appendChild(noFieldsText);
+        validationList.appendChild(noFieldsNode);
+    }
+}
+
+var requiredFields = function () {
+    validationDiv.style.display = 'flex';
+    var isValid = true;
+
+		var inputs = ["fullName", "email", "password", "passwordConfirmation"];
+		for(i = 0; i < inputs.length; i++) {
+			var field = document.getElementById(inputs[i]);
+			if(!field.hasAttribute('required')) {
+				isValid = false;
+			}
+		}
+
+    if (isValid == true) {
+        var requiredNode = document.createElement("LI");
+        var requiredText = document.createTextNode(validText + " " + 'All fields are required' + " ");
+        requiredNode.appendChild(requiredText);
+        validationList.appendChild(requiredNode);
+        formValidationHash.requiredFields = true; 
+    }
+    else {
+        var noRequiredNode = document.createElement("LI");
+        noRequiredNode.style.color = "red";
+        var noRequiredText = document.createTextNode(validText + " " + 'Required attributes missing' + " ");
+        noRequiredNode.appendChild(noRequiredText);
+        validationList.appendChild(noRequiredNode);
+    }
+}
+
+var associatedLabels = function () {
+    validationDiv.style.display = 'flex';
+    var inputs = document.querySelectorAll('.infoInput').name;
+    var labels = document.querySelectorAll('labels').for;
+    if (inputs == labels) {
+        var labelNode = document.createElement("LI");
+        var labelText = document.createTextNode(validText + " " + 'All inputs have associated labels' + " ");
+        labelNode.appendChild(labelText);
+        validationList.appendChild(labelNode);
+        formValidationHash.associatedLabels = true; 
+    }
+    else {
+        var noLabelNode = document.createElement("LI");
+        noLabelNode.style.color = "red";
+        var noLabelText = document.createTextNode(validText + " " + 'There are Labels missing for inputs' + " ");
+        noLabelNode.appendChild(noLabelText);
+        validationList.appendChild(noLabelNode);
+    }
+}
+
+var validButtons = function() {
+    validationDiv.style.display = 'flex';
+    var submitButton = document.querySelector('.submit-button').value;
+    var resetButton = document.querySelector('.reset-button').value;
+    var submitValue = 'Register';
+    var resetValue = 'Reset';
+    if ((submitButton == submitValue) && (resetButton == resetValue)) {
+        var buttonsNode = document.createElement("LI");
+        var buttonsText = document.createTextNode(validText + " " + 'Buttons content is correct' + " ");
+        buttonsNode.appendChild(buttonsText);
+        validationList.appendChild(buttonsNode);
+        formValidationHash.validButtons = true; 
+    }
+    else {
+        var noButtonsNode = document.createElement("LI");
+        noButtonsNode.style.color = "red";
+        var noButtonsText = document.createTextNode(validText + " " + 'Buttons content is wrong' + " ");
+        noButtonsNode.appendChild(noButtonsText);
+        validationList.appendChild(noButtonsNode);
+    }
+}
+
+var validation = function () {
+  if(formValidationHash.validButtons === true &&
+		formValidationHash.formInDom === true &&
+		formValidationHash.fieldsQuantity === true &&
+		formValidationHash.requiredFields === true &&
+		formValidationHash.associatedLabels == true) {
+      validationDiv.textContent = validText + " " + 'Every validation has passed!';
+  }
+}
+
+function validateAll(){
+	formInDom();
+	fieldsQuantity()
+	requiredFields();
+	associatedLabels();
+	validButtons();
+	validation();
 }

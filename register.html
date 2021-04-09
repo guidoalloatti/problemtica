@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/register.js"></script>
+   
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
 
@@ -22,21 +22,23 @@
     
     <div class="container">
         <div class= "datos">
-            <form action="">
-                <label for="fname" required="">Full name:</label>
-                <input type="text" required id="fullName" name="fullName" onfocusout="validateFullName()"><br><br>
+            <form id = "loginForm" action="">
+                <label for="fullName" required>Full name:</label>
+                <input type="text" class="infoInput" id="fullName" name="fullName" onblur="validateFullName()" onfocus= "onFocusValidateFullName()" onfocusout="formDataDiv()" required><br><br>
                 <label for="email" required>E-mail:</label>
-                <input type="email" required id="email" name="email" onfocusout="validateEmail()"><br><br>
+                <input type="email" class="infoInput" id="email" name="email" onblur="validateEmail()" onfocus= "onFocusValidateEmail()" required><br><br>
                 <label for="password" required>Password:</label>
-                <input type="password" required id="password" name="password" onfocusout="validatePassword()"><br><br>
+                <input type="password" class="infoInput" id="password" name="password" onblur="validatePassword()"onfocus= "onFocusValidatePassword()" required><br><br>
                 <label for="passwordConfirmation" required>Confirm password:</label>
-                <input type="password" required id="passwordConfirmation" name="passwordConfirmation" onfocusout="validatePasswordConfirmation()"><br><br>
+                <input type="password" class="infoInput" id="passwordConfirmation" name="passwordConfirmation" onblur="validatePasswordConfirmation()" onfocus= "onFocusValidatePasswordConfirmation()" required><br><br>
 
                 <div class= "registerButton">
-                    <input type="button" class="reset-button botonLink" value="Reset" onclick="formReset()">
-                    <input type="button" class="submit-button botonLink" value="Register" onclick="formSubmit()">
+                    <input type="button" class="reset-button botonLink" id="reset-button" value="Reset" onclick="formReset()">
+                    <!-- <input type="button" class="submit-button botonLink" id="submit-button" value="Register" formDataDiv onclick="formSubmit()"> -->
+                    <input type="button" class="submit-button botonLink" id="submit-button" value="Register" formDataDiv onclick="formDataDiv()">
                 </div>
-                <input type="button" class="fill-button botonLink" value="Fill Form" onclick="fillForm()">
+                <input type="button" class="fill-button botonLink" id="fill-button" value="Fill Form" onclick="fillForm()">
+                <input type="button" class="validation-button botonLink" id="validation-button" value="Validate Form" onclick="validateAll()">        
             </form>
         </div>
 
@@ -45,14 +47,28 @@
         <div id="password_error" class="error-message"></div>
         <div id="password_confirmation_error" class="password-confirmation-error-message"></div>
         <div id="all_good" class="all-good-message"></div>
-
              
         <div class="goToPage">
-            <a class="goto-login-button botonLink" href="./login.html">Go to Login</a>
+            <a class="goto-login-button botonLink" id="goto-login-button" href="./login.html">Go to Login</a>
         </div>
 
-
+        <div class="validationContent">
+            <ul class="validationList">
+            </ul>
+        </div>
+        <div class="content"></div>
+        
+            <!-- DIV PARA DATOS DEL FORM -->
+            <div class= "formData" id= "formDataId"> 
+                <span id= "formDataSpan">FORM DATA</span>
+                <ul class="formDataUL"></ul>
+                <input type="button" class="formDataChecked botonLink" id="datachecked-button" value="Confirm submission" onclick="formSubmit()">
+            </div>
     </div>
+
+
+
+    <script src="js/register.js"></script>
 </body>
 </html>
 

@@ -20,18 +20,32 @@ body {
     margin-top: 45px;
 }
 
-.goto-login-button {
-    position: absolute !important;
-    top: 19px !important;
-    left: 18px !important;
+#goto-login-button {
+    position: absolute;
+    top: 19px;
+    left: 18px;
 }
 
-.fill-button {
-    color: white !important;
-    background: #929292 !important;
-    border: 1px solid #929292 !important;
-    padding: 5px 21px !important;
-    border-radius: 5px !important;
+#validate-button{
+    color: white;
+    background: #639669;
+    border: 1px solid #ffffff;
+    padding: 5px 21px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-right: 5px;
+    position: absolute;
+    top: 115px;
+    right: 1px;
+}
+
+
+#fill-button {
+    color: white;
+    background: #929292;
+    border: 1px solid #929292;
+    padding: 5px 21px;
+    border-radius: 5px;
     font-size: 12px;
     margin-right: 5px;
     position: absolute;
@@ -39,23 +53,23 @@ body {
     right: 1px;
 }
 
-.reset-button {
-    color: white !important;
-    background: #ff8025 !important;
-    border: 1px solid #ff8025 !important;
-    padding: 10px 20px !important;
-    border-radius: 5px 0px 0px 5px !important;
-    font-size: 20px !important;
+#reset-button {
+    color: white;
+    background: #ff8025;
+    border: 1px solid #ff8025;
+    padding: 10px 20px;
+    border-radius: 5px 0px 0px 5px;
+    font-size: 20px;
     margin-right: 5px;
 }
 
-.submit-button {
-    color: white !important;
-    background: #42bb42 !important;
-    border: 1px solid #42bb42 !important;
-    padding: 10px 20px !important;
-    border-radius: 0px 5px 5px 0px !important;
-    font-size: 20px !important;
+#submit-button {
+    color: white;
+    background: #42bb42;
+    border: 1px solid #42bb42;
+    padding: 10px 20px;
+    border-radius: 0px 5px 5px 0px;
+    font-size: 20px;
 }
 
 .error-message {
@@ -92,7 +106,18 @@ body {
     font-size: 20px;
     background-image: url(../images/tft\ logo.png);
     background-repeat: no-repeat;
-    
+    background-position: right;
+}
+
+.containerPostLogin {
+    padding-top: 50px;
+    margin: auto;
+    height: 1000px;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    background-image: url(../images/tft\ fondo.jpg);
+    background-repeat: no-repeat;
     background-position: right;
 }
 
@@ -112,11 +137,11 @@ body {
 }
 
 header{
-    color: #1b6fe4;
+    color: #e1d7b4;
     border-bottom: black solid 3px;
-    background-color: #e1d7b4;
+    background-color:  #1b6fe4;
     font-size: 30px;
-    font-family: 'Sedgwick Ave', cursive;
+    font-family: 'Open Sans', sans-serif;
     text-align: center;
     padding: 20px;
 }
@@ -167,8 +192,102 @@ input[type=email] {
     text-decoration: underline;
 }
 
-  .goToPage{
+  .goToPage {
     margin-top: 20px;
     display: flex;
     justify-content: center;
   }
+
+  #login-button{
+    color: white;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    background: #42bb42;
+    border: 1px solid #42bb42;
+    padding: 10px 20px;
+    border-radius: 5px 5px 5px 5px;
+    font-size: 20px;
+  }
+  
+  .headerPostLogin{
+    color: #e1d7b4;
+    border-bottom: black solid 3px;
+    background-color:  #1b6fe4;
+    font-size:30px;
+    font-family: 'Open Sans', sans-serif;
+    text-align: right;
+    margin-top: -30px;
+    height: 65px;
+}
+
+  #logoTopaz{
+    max-width: 5%;
+  }
+
+   .validationContent{
+    display: none;
+    color: green;
+    text-align: left;
+    background: #FFF;
+    width: 500px;
+    margin: 20px auto;
+    min-height: 10px;
+    padding: 10px;
+    border-radius: 10px; 
+  }
+
+  #validation-button{
+    color: white;
+    background: #929292;
+    border: 1px solid #929292;
+    padding: 5px 21px;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-right: 5px;
+    position: absolute;
+    top: 120px;
+    right: 1px;
+  }
+
+    /* .validationList{
+    display: none;
+    color: #FFF;
+    text-align: center;
+    background: rgb(134, 7, 2);
+    width: 340px;
+    margin: 40px auto;
+    height: 25px;
+    padding: 10px;
+    border-radius: 10px; 
+    } */
+
+
+    #formDataId {
+      display: none;
+      color: #FFF;
+      text-align: left;
+      line-height: 30px;
+      background: #1d4d8394;
+      width: 340px;
+      margin: 20px auto;
+      min-height: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      }
+
+      #datachecked-button{
+        justify-content: center;
+        display: flex;
+        margin: 30px auto 5px;
+      }
+
+      #formDataSpan {
+        display: flex;
+        justify-content: center;
+        background-color: blanchedalmond;
+        color: #1d4d83e7;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }

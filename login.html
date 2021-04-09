@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/login.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
     <title>TFTopaz App: Login</title>
@@ -24,12 +25,15 @@
             <div class= "datos">
                 <form action="/action_page.php">                    
                     <label for="email" required>E-mail:</label>
-                    <input type="email" required id="email" name="email"><br><br>
+                    <input type="email" required id="email" name="email" onfocusout="validateEmail()"><br><br>
                     <label for="password" required>Password:</label>
-                    <input type="password" required id="password" name="password"><br><br>
-                    <div class="loginButton"><input type="submit" value="Log in"></div>
+                    <input type="password" required id="password" name="password"onfocusout="validatePassword()"><br><br>
+                    <input type="button" class="login-button botonLink" id="login-button" value="Log in" onclick="formSubmit()">
                 </form>
             </div>
+        <div id="email_error" class="error-message"></div>
+        <div id="password_error" class="error-message"></div>
+        <div id="all_good" class="all-good-message"></div>
     
         <div class="dont-have-account">
             Don't have an account?
