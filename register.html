@@ -24,7 +24,7 @@
         <div class= "datos">
             <form id = "loginForm" action="">
                 <label for="fullName" required>Full name:</label>
-                <input type="text" class="infoInput" id="fullName" name="fullName" onblur="validateFullName()" onfocus= "onFocusValidateFullName()" onfocusout="formDataDiv()" required><br><br>
+                <input type="text" class="infoInput" id="fullName" name="fullName" onblur="validateFullName()" onfocus= "onFocusValidateFullName()" required><br><br>
                 <label for="email" required>E-mail:</label>
                 <input type="email" class="infoInput" id="email" name="email" onblur="validateEmail()" onfocus= "onFocusValidateEmail()" required><br><br>
                 <label for="password" required>Password:</label>
@@ -34,7 +34,6 @@
 
                 <div class= "registerButton">
                     <input type="button" class="reset-button botonLink" id="reset-button" value="Reset" onclick="formReset()">
-                    <!-- <input type="button" class="submit-button botonLink" id="submit-button" value="Register" formDataDiv onclick="formSubmit()"> -->
                     <input type="button" class="submit-button botonLink" id="submit-button" value="Register" formDataDiv onclick="formDataDiv()">
                 </div>
                 <input type="button" class="fill-button botonLink" id="fill-button" value="Fill Form" onclick="fillForm()">
@@ -60,7 +59,7 @@
         
             <!-- DIV PARA DATOS DEL FORM -->
             <div class= "formData" id= "formDataId"> 
-                <span id= "formDataSpan">FORM DATA</span>
+                <span id= "formDataSpan">FORM DATA LOG</span>
                 <ul class="formDataUL"></ul>
                 <input type="button" class="formDataChecked botonLink" id="datachecked-button" value="Confirm submission" onclick="formSubmit()">
             </div>

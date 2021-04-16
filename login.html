@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/login.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap" rel="stylesheet">
     <title>TFTopaz App: Login</title>
@@ -23,12 +22,13 @@
 
         <div class="container">
             <div class= "datos">
-                <form action="/action_page.php">                    
+                <form id= "loginForm" action="">                    
                     <label for="email" required>E-mail:</label>
-                    <input type="email" required id="email" name="email" onfocusout="validateEmail()"><br><br>
+                    <input type="email" required id="email" name="email" class= "infoInput" onfocus= onFocusValidateEmail() onfocusout="validateEmail()"><br><br>
                     <label for="password" required>Password:</label>
-                    <input type="password" required id="password" name="password"onfocusout="validatePassword()"><br><br>
+                    <input type="password" required id="password" name="password" class= "infoInput" onfocus= onFocusValidatePassword() onfocusout= "validatePassword()"><br><br>
                     <input type="button" class="login-button botonLink" id="login-button" value="Log in" onclick="formSubmit()">
+                    <input type="button" class="validation-button botonLink" id="validation-button" value="Validate Form" onclick="validateAll()">
                 </form>
             </div>
         <div id="email_error" class="error-message"></div>
@@ -38,6 +38,13 @@
         <div class="dont-have-account">
             Don't have an account?
         </div>
+
+        <div class="validationContent">
+            <ul class="validationList">
+            </ul>
+        </div>
+        
+        <div class="content"></div>
         <div class="goToPage">
             <div>
                 <a class="botonLink" href="./register.html">Go to Register</a>
@@ -45,5 +52,6 @@
         </div>
 
     </div>
+    <script src="js/login.js"></script>
 </body>
 </html>
