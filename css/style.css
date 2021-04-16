@@ -79,7 +79,7 @@ body {
     background: #711b1b94;
     width: 340px;
     margin: 20px auto;
-    height: 25px;
+    min-height: 10px;
     padding: 10px;
     border-radius: 10px;
 }
@@ -91,7 +91,7 @@ body {
     background: #711b1b94;
     width: 400px;
     margin: 20px auto;
-    height: 40px;
+    min-height: 10px;
     padding: 10px;
     border-radius: 10px;
 }
@@ -230,11 +230,21 @@ input[type=email] {
     color: green;
     text-align: left;
     background: #FFF;
-    width: 500px;
+    width: max-content;
     margin: 20px auto;
     min-height: 10px;
     padding: 10px;
-    border-radius: 10px; 
+    border-radius: 10px;
+  }
+  
+  #validationSpan{
+    display: flex;
+    justify-content: center;
+    background-color: blanchedalmond;
+    color: #1d4d83e7;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
   }
 
   #validation-button{
@@ -250,36 +260,17 @@ input[type=email] {
     right: 1px;
   }
 
-    /* .validationList{
-    display: none;
-    color: #FFF;
-    text-align: center;
-    background: rgb(134, 7, 2);
-    width: 340px;
-    margin: 40px auto;
-    height: 25px;
-    padding: 10px;
-    border-radius: 10px; 
-    } */
-
-
     #formDataId {
       display: none;
       color: #FFF;
       text-align: left;
       line-height: 30px;
       background: #1d4d8394;
-      width: 340px;
+      width: max-content;
       margin: 20px auto;
       min-height: 10px;
       padding: 10px;
       border-radius: 10px;
-      }
-
-      #datachecked-button{
-        justify-content: center;
-        display: flex;
-        margin: 30px auto 5px;
       }
 
       #formDataSpan {
@@ -290,4 +281,10 @@ input[type=email] {
         border-radius: 10px;
         margin-bottom: 10px;
         font-weight: 600;
+      }
+
+      #datachecked-button{
+        justify-content: center;
+        display: flex;
+        margin: 30px auto 5px;
       }

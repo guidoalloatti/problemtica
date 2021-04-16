@@ -1,8 +1,11 @@
+// INPUTS VALIDATION
+
 var fullName = document.getElementById("fullName");
 var email = document.getElementById("email");
 var password = document.getElementById("password");
 var passwordConfirmation = document.getElementById("passwordConfirmation");
 var errors = document.getElementById("errors");
+var postingEnabled = true;
 
 var validations = {
 	fullNameValid: false,
@@ -17,7 +20,7 @@ function validateEmailRegex(email) {
 }
 
 function validatePasswordRegex(password) {
-	const re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+	const re = /(?=.*\d)(?=.*[a-z]).{8,}/; 
   return re.test(String(password).toLowerCase());
 }
 
@@ -42,12 +45,14 @@ function validatePasswordConfirmation() {
 		error.innerHTML = message;
 	 	error.style.display = "block";
 		validations.passwordConfirmationValid = false;
+		document.getElementById("passwordConfirmation").style.background = "rgb(255 165 165 / 58%)"
 		checkAllFields();
 	}	else if (!validatePasswordRegex(password)) {
 		var message = 'The password confirmation is invalid.';
 		error.innerHTML = message;
 	  	error.style.display = "block";
 		validations.passwordConfirmationValid = false;
+		document.getElementById("passwordConfirmation").style.background = "rgb(255 165 165 / 58%)"
 		checkAllFields();
 	} else {
 		error.style.display = "none";
@@ -66,6 +71,7 @@ function validatePassword() {
 	  error.style.display = "block";
 		validations.passwordValid = false;
 		checkAllFields();
+		document.getElementById("password").style.background = "rgb(255 165 165 / 58%)";
 	} else {
 		error.style.display = "none";
 		validations.passwordValid = true;
@@ -76,12 +82,13 @@ function validatePassword() {
 function validateFullName() {
 	var fullName = document.getElementById("fullName").value;
 	var error = document.getElementById("fullname_error");
-
-	if(fullName.length > 128 || fullName.length < 3) {
+	
+	if(fullName.length > 128 || fullName.length < 6 || !fullName.includes(" ")){
 		var message = 'The name is invalid.';
 		error.innerHTML = message;
-	  error.style.display = "block";
+	  	error.style.display = "block";
 		validations.fullNameValid = false;
+		document.getElementById("fullName").style.background = "rgb(255 165 165 / 58%)"
 		checkAllFields();
 	} else {
 		error.style.display = "none";
@@ -97,8 +104,9 @@ function validateEmail() {
 	if(!validateEmailRegex(email)) {
 		var message = 'The email is invalid.';
 		error.innerHTML = message;
-	  error.style.display = "block";
+	 	 error.style.display = "block";
 		validations.emailValid = false;
+		document.getElementById("email").style.background = "rgb(255 165 165 / 58%)"
 		checkAllFields();
 	} else {
 		error.style.display = "none";
@@ -109,18 +117,25 @@ function validateEmail() {
 
 function onFocusValidateFullName(){
 	var error = document.getElementById("fullname_error").style.display = "none";
+	document.getElementById("fullName").style.background = "white"
 }
 
 function onFocusValidatePassword(){
 	var error = document.getElementById("password_error").style.display = "none";
+	document.getElementById("password").style.background = "white"
+
 }
 
 function onFocusValidatePasswordConfirmation(){
 	var error = document.getElementById("password_confirmation_error").style.display = "none";
+	document.getElementById("passwordConfirmation").style.background = "white"
+
 }
 
 function onFocusValidateEmail(){
 	var error = document.getElementById("email_error").style.display = "none";
+	document.getElementById("email").style.background = "white"
+
 }
 
 function cleanInputs() {
@@ -156,6 +171,10 @@ function formReset() {
 	cleanAllGood();
 	cleanValidationDiv();
 	cleanDataDiv();
+	document.getElementById("fullName").style.background = "white"
+	document.getElementById("email").style.background = "white"
+	document.getElementById("password").style.background = "white"
+	document.getElementById("passwordConfirmation").style.background = "white"
 }
 
 function runValidations() {
@@ -197,9 +216,6 @@ function fillForm() {
 	cleanErrorMessages()
 }
 
-
-// QUEDÉ ACÁ HACIENDO EL DIV DE DATA DEL FORM
-
 var formData = document.querySelector(".formData");
 var formDataUL = document.querySelector(".formDataUL");
 
@@ -208,11 +224,36 @@ function setDataDivDisplayNone(){
 }
 setDataDivDisplayNone();
 
-function formDataDiv() {
+function registerPostRequest() {
+	var url = "http://localhost:4000/register";	
+	
+	var params = {
+		fullName: document.querySelector("#fullName").value,
+		email: document.querySelector("#email").value,
+		password: document.querySelector("#password").value,
+		passwordConfirmation: document.querySelector("#passwordConfirmation").value
+	};
 
-	var email = document.querySelector("#email").value;
-	var url = "https://jsonplaceholder.typicode.com/users?email=" + email;
-	console.log(fetch(url));
+	axios({
+		method: 'post',
+		url: url,
+		data: params
+	})
+	.then((response) => {
+        console.log(response);
+		if(response.data.register_successful) {
+			alert("Register Successful!");
+		}
+    })
+    .catch((error) => {
+       console.log(error);
+    });
+}
+
+function formDataDiv() {
+	if(postingEnabled) {
+		registerPostRequest();
+	}
 
 	if(document.querySelector(".formData").style.display == "none"){
 		var formNodeName = document.createElement("LI");
@@ -223,7 +264,7 @@ function formDataDiv() {
 		var formInfoPassword = document.createTextNode("Password:" + " " + document.querySelector("#password").value);
 		var formNodePasswordConfirmation = document.createElement("LI");
 		var formInfoPasswordConfirmation = document.createTextNode("Password Confirmation:" + " " + document.querySelector("#passwordConfirmation").value);
-	
+		
 		formNodeName.appendChild(formInfoName);
 		formNodeEmail.appendChild(formInfoEmail);
 		formNodePassword.appendChild(formInfoPassword)
@@ -232,15 +273,13 @@ function formDataDiv() {
 		formDataUL.appendChild(formNodeEmail);
 		formDataUL.appendChild(formNodePassword);
 		formDataUL.appendChild(formNodePasswordConfirmation);
-	
+		
 		document.querySelector(".formData").style.display = "block";
 		cleanAllGood();
 	}
 }	
 
-
-// VALIDATION FUNCTION BUTTON
-var validText = "Validation results:";
+var validText = " ";
 var validationDiv = document.querySelector('.validationContent');
 var validationList = document.querySelector('.validationList');
 var formValidationHash = {
@@ -259,12 +298,13 @@ var formInDom = function() {
         var formText = document.createTextNode(validText + " " + 'Form is found' + " ");
         formNode.appendChild(formText);
         validationList.appendChild(formNode);
-				formValidationHash.formInDom = true;
+		formValidationHash.formInDom = true;
     }
     else {
         var noFormNode = document.createElement("LI");
         var noFormText = document.createTextNode(validText + " " + 'Form is not found' + " ");
-        noFormNode.appendChild(noFormText);
+        noFormNode.style.color = "red"
+		noFormNode.appendChild(noFormText);
         validationList.appendChild(noFormNode);
     }
 }
@@ -278,7 +318,7 @@ var fieldsQuantity = function () {
         var fieldsText = document.createTextNode(validText + " " + 'Input fields are correct' + " ");
         fieldsNode.appendChild(fieldsText);
         validationList.appendChild(fieldsNode);
-				formValidationHash.fieldsQuantity = true;    
+		formValidationHash.fieldsQuantity = true;    
 		}
     else {
         var noFieldsNode = document.createElement("LI");
@@ -365,11 +405,16 @@ var validation = function () {
 		formValidationHash.fieldsQuantity === true &&
 		formValidationHash.requiredFields === true &&
 		formValidationHash.associatedLabels == true) {
-      validationDiv.textContent = validText + " " + 'Every validation has passed!';
+      	validationDiv.textContent = validText + " " + 'Every validation has passed!';
   }
 }
 
 function validateAll(){
+	var titleNode = document.createElement("LI");
+	var titleText = document.createTextNode("VALIDATION RESULTS:");
+	titleNode.appendChild(titleText);
+    validationList.appendChild(titleNode);
+	validationList.firstElementChild.style.color="black";
 	formInDom();
 	fieldsQuantity()
 	requiredFields();
